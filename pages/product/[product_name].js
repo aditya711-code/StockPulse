@@ -153,7 +153,7 @@ const Product=()=>{
    
     const customizedContent=(item)=>{
             return(
-                <div style={{display:'flex', flexDirection:'column'}}>
+                <div className="xl:w-6rem" style={{display:'flex', flexDirection:'column'}}>
                                 <span style={{fontWeight:'600'}}>{item.key}</span>
                                 <span>{item.value}</span>
                 </div>
@@ -206,16 +206,15 @@ const Product=()=>{
 
                 </Card> */}
                 <BlockUI >
-                    <Panel header={"About "+`${details.Symbol}`}  >
+                    <Panel className="p-2 "header={"About "+`${details.Symbol}`}  >
                         <p className="m-1">
                             {details.Description}
                         </p>
                         <Tag className="m-4" severity="info" value={"Industry: "+details.Industry}></Tag>
                         <Tag className="m-4" severity="info" value={"Sector: "+details.Sector}></Tag>
                         <Timeline  className="customized-timeline w-10 ml-6" value={events} layout="horizontal" align="bottom"  content={customizedContent} />
-                       {/* style={{display:'flex',justifyContent:'space-between', textAlign:'center',flexWrap:"wrap",width:"50px",justifyContent:'center',alignItems:'center'} */}
-                        <div className="flex sm-m-auto justify-content-between justify-content-center align-items-center flex-wrap w-11" >
-                            <div className="flex flex-column">
+                        <div className="flex-wrap flex justify-content-between" >
+                            <div className="flex flex-column sm:mb-3">
                                 <span style={{fontWeight:'600'}}>Market Cap</span>
                                 <span>{"$"+details["MarketCapitalization"]}</span>
                             </div>
