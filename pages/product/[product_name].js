@@ -24,9 +24,9 @@ const Product=()=>{
     const{data,loading,error}=useSelector((state)=>state.productDetails)
     const keywords=product_name
     
-    
+    console.log("keywords",keywords)
     useEffect(()=>{
-        if(get('productDetails'))
+        if(get('productDetails').Symbol==keywords)
         {
             const data=get('productDetails')
             setDetails(data)
@@ -60,7 +60,7 @@ const Product=()=>{
     
     
     useEffect(()=>{
-        if(loading==='succeeded' && !get('productDetails'))
+        if(loading==='succeeded' && get('productDetails').Symbol!=keywords)
         {
             setDetails(data)
             set('productDetails',data);
@@ -69,14 +69,7 @@ const Product=()=>{
         }
     },[loading])
 
-    useEffect(()=>{
-        console.log("loading",loading)
-        if(loading==='succeeded')
-        {
-            
-            
-        }
-    },[loading])
+    
   
     
 
@@ -194,17 +187,6 @@ const Product=()=>{
                 </div>
             </div>
             <div className="card mt-4 border-round">
-                {/* <Card title={"About "+`${details.Symbol}`}>
-                    <p className="m-0">
-                    {details.Description}
-                    </p>
-                    <Tag className="mr-2 mt-4" severity="info" value={details.Industry}></Tag>
-                    <Tag className="mr-2 mt-4" severity="info" value={details.Sector}></Tag>
-                    
-                     <Timeline   value={events} layout="horizontal" align="bottom"  content={(item)=>item} />
-  
-
-                </Card> */}
                 <BlockUI >
                     <Panel className="p-2 "header={"About "+`${details.Symbol}`}  >
                         <p className="m-1">

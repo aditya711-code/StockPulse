@@ -3,7 +3,7 @@ import { useState,useEffect } from "react";
 import { DataView } from 'primereact/dataview';;
 import { useRouter } from 'next/navigation'
 import { Ripple } from 'primereact/ripple';
-import {BiSolidUpArrow,BiSolidDownArrow,BiSolidDownArrowSquare} from 'react-icons/bi'
+import {BiSolidUpArrow,BiSolidDownArrow} from 'react-icons/bi'
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchTopGainersLosers,updateLoading } from '@/redux/features/gainerslosersSlice';
 import { ProgressSpinner } from 'primereact/progressspinner';

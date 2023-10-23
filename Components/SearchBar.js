@@ -1,7 +1,6 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { OverlayPanel } from 'primereact/overlaypanel';
-import { Toast } from 'primereact/toast';
 import { Column } from 'primereact/column';
 import { DataTable } from 'primereact/datatable';
 import {AiOutlineSearch} from 'react-icons/ai'
@@ -16,15 +15,7 @@ const SearchBar=()=> {
     const [searchSymbol,setSearchSymbol]=useState('')
     const router=useRouter();
     const dispatch=useDispatch()
-    const{data,loading,error}=useSelector((state)=>state.searchProducts)
-    const fetchData=async(symbol)=>{
-        const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo`
-        const response = await fetch(url);
-        const data=await response.json()
-        ('data-symbol',data)
-        return data
-    }
-  
+    const{data,loading,error}=useSelector((state)=>state.searchProducts)  
     useEffect(()=>{
         const keywords=searchSymbol
         dispatch(fetchSearchedProducts(keywords))
@@ -52,7 +43,6 @@ const SearchBar=()=> {
     
     return (
         <div className="card flex flex-column align-items-center gap-3">
-            <Toast ref={toast} />
                 <span className="p-input-icon-left searchBar" onClick={(e) => op.current.toggle(e)}>
                     <AiOutlineSearch />
                     <InputText placeholder="Search" type="text" className="p-inputtext-sm" value={searchSymbol} onChange={(e)=>setSearchSymbol(e.target.value)}/>

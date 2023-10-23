@@ -7,8 +7,9 @@ const initialState={
     
 }
 export const fetchSearchedProducts=createAsyncThunk('searchProducts/fetchData',async(keywords)=>{
-    ("keywords-search",keywords)
-    const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${API_KEY}`
+    
+    // const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${API_KEY}`
+    const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo`
     const config = { headers: { 'User-Agent': 'request' } };
     const response = await fetch(url, config);
     if (!response.ok) {
@@ -28,7 +29,7 @@ const searchProductsSlice=createSlice({
             {
                 state.loading="succeeded"
             }
-            
+
         }
     },
     extraReducers:(builder)=>{

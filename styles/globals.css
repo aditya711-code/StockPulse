@@ -5,16 +5,15 @@
   font-size:1.5rem;
   color:#6f72ed;
   
-
 }
 .leftNav ,.rightNav{
   display:flex;
   padding:0.6rem;
-  align-items: center;
+  align-items:center;
 }
 .searchBar{
   display:flex;
-  align-items:center;
+  align-content:center;
 }
 body{
   background-color: rgb(246, 246, 246);
