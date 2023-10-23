@@ -20,7 +20,7 @@ const Product=()=>{
     const params=useParams()
     const dispatch=useDispatch()
     const{data,loading,error}=useSelector((state)=>state.productDetails)
-    const keywords=params.props
+    const keywords=params.product_name
     
     useEffect(()=>{
         // if(get('productDetails'))
@@ -148,7 +148,6 @@ const Product=()=>{
                 </div>
             )
     }
-    ("Events",events)
      if(loading!=='succeeded')
    {
          return (<div className="card flex justify-content-center">

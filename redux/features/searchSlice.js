@@ -4,7 +4,7 @@ const initialState={
     data:null,
     loading:'idle',
     error:null,
-    lastFetched:null,
+    
 }
 export const fetchSearchedProducts=createAsyncThunk('searchProducts/fetchData',async(keywords)=>{
     ("keywords-search",keywords)
@@ -22,7 +22,15 @@ export const fetchSearchedProducts=createAsyncThunk('searchProducts/fetchData',a
 const searchProductsSlice=createSlice({
     name:'searchProducts',
     initialState,
-    reudcers:{},
+    reudcers:{
+        updateLoading:(state,action)=>{
+            if(action.payload)
+            {
+                state.loading="succeeded"
+            }
+            
+        }
+    },
     extraReducers:(builder)=>{
         builder.
         addCase(fetchSearchedProducts.pending,(state)=>{
