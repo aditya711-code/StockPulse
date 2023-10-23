@@ -3,7 +3,6 @@ import { useState,useEffect } from "react";
 import { DataView } from 'primereact/dataview';;
 import { useRouter } from 'next/navigation'
 import { Ripple } from 'primereact/ripple';
-import { ScrollTop } from 'primereact/scrolltop';
 import {BiSolidUpArrow,BiSolidDownArrow,BiSolidDownArrowSquare} from 'react-icons/bi'
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchTopGainersLosers,updateLoading } from '@/redux/features/gainerslosersSlice';
@@ -106,7 +105,7 @@ const Explore=()=>{
     return (
       <>
         
-        <div className="flex  xl:pr-8 xl:pl-8 sm:pr-1 sm:pl-1">
+        <div className="flex xl:pr-8 xl:pl-8 sm:pr-4 sm:pl-4">
             
             <TabView >
                 <TabPanel header="Top Gainers" className="ml-5">
