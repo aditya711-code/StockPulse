@@ -12,29 +12,35 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import { fillArrayWithRandomValues } from '@/utils/helpers';
 import {get,set} from '@/utils/storage'
 import { updateLoading } from '@/redux/features/productSlice';
+import { useRouter } from 'next/router';
 const Product=()=>{
     const [details,setDetails]=useState([])
     const [events,setEvents]=useState([])
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
-    const {product_name}=useParams()
+    const router=useRouter();
+    const {product_name}=router.query
     const dispatch=useDispatch()
     const{data,loading,error}=useSelector((state)=>state.productDetails)
     const keywords=product_name
+    
     console.log("product_name",product_name)
+  
     useEffect(()=>{
         // if(get('productDetails'))
         // {
         //     const data=get('productDetails')
         //     dispatch(updateLoading(data))
+        //     console.log("data",data)
         //     setDetails(data)
         // }
         // else{
-            
-            dispatch(fetchProductDetails(keywords))
+        //     console.log("keywords",keywords)
+        //     dispatch(fetchProductDetails(keywords))
         // }
+        dispatch(fetchProductDetails(keywords))
        
-    },[dispatch])
+    },[dispatch,router])
     
     
     useEffect(()=>{
