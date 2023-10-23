@@ -17,11 +17,11 @@ const Product=()=>{
     const [events,setEvents]=useState([])
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
-    const params=useParams()
+    const {product_name}=useParams()
     const dispatch=useDispatch()
     const{data,loading,error}=useSelector((state)=>state.productDetails)
-    const keywords=params.product_name
-    
+    const keywords=product_name
+    console.log("product_name",product_name)
     useEffect(()=>{
         // if(get('productDetails'))
         // {
