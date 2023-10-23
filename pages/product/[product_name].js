@@ -24,54 +24,59 @@ const Product=()=>{
     const{data,loading,error}=useSelector((state)=>state.productDetails)
     const keywords=product_name
     
-    console.log("product_name",product_name)
-  
+    
     useEffect(()=>{
-        // if(get('productDetails'))
-        // {
-        //     const data=get('productDetails')
-        //     dispatch(updateLoading(data))
-        //     console.log("data",data)
-        //     setDetails(data)
-        // }
-        // else{
-        //     console.log("keywords",keywords)
-        //     dispatch(fetchProductDetails(keywords))
-        // }
-        dispatch(fetchProductDetails(keywords))
+        if(get('productDetails'))
+        {
+            const data=get('productDetails')
+            setDetails(data)
+            const values=[]
+            values.push({
+                "key":"52-Week Low",
+                "value":"$"+data["52WeekLow"]
+            })
+            values.push({
+                "key":"Current Price",
+                "value":"$"+data["AnalystTargetPrice"]
+            })
+            values.push({
+                "key":"52-WeekHigh",
+                "value":"$"+data["52WeekHigh"]
+            })
+            setEvents(values);
+            console.log("events",)
+            dispatch(updateLoading(data))
+            console.log("data",data)
+           
+            console.log("details",details)
+        }
+        else{
+
+            dispatch(fetchProductDetails(keywords))
+        }
+       
        
     },[dispatch,router])
     
     
     useEffect(()=>{
-        if(loading==='succeeded')
+        if(loading==='succeeded' && !get('productDetails'))
         {
             setDetails(data)
             set('productDetails',data);
-            ("details",data);
+            console.log("details",data);
             
         }
     },[loading])
 
     useEffect(()=>{
+        console.log("loading",loading)
         if(loading==='succeeded')
         {
-        const values=[]
-            values.push({
-                "key":"52-Week Low",
-                "value":"$"+details["52WeekLow"]
-            })
-            values.push({
-                "key":"Current Price",
-                "value":"$"+details["AnalystTargetPrice"]
-            })
-            values.push({
-                "key":"52-WeekHigh",
-                "value":"$"+details["52WeekHigh"]
-            })
-            setEvents(values);
+            
+            
         }
-    },[events])
+    },[loading])
   
     
 
@@ -145,7 +150,7 @@ const Product=()=>{
         setChartData(data);
         setChartOptions(options);
     }, []);
-    //("details",details)
+   
     const customizedContent=(item)=>{
             return(
                 <div style={{display:'flex', flexDirection:'column'}}>
@@ -210,23 +215,23 @@ const Product=()=>{
                         <Timeline  className="customized-timeline w-10 ml-6" value={events} layout="horizontal" align="bottom"  content={customizedContent} />
                        {/* style={{display:'flex',justifyContent:'space-between', textAlign:'center',flexWrap:"wrap",width:"50px",justifyContent:'center',alignItems:'center'} */}
                         <div className="flex sm-m-auto justify-content-between justify-content-center align-items-center flex-wrap w-11" >
-                            <div style={{display:'flex', flexDirection:'column'}}>
+                            <div className="flex flex-column">
                                 <span style={{fontWeight:'600'}}>Market Cap</span>
                                 <span>{"$"+details["MarketCapitalization"]}</span>
                             </div>
-                            <div style={{display:'flex', flexDirection:'column'}}>
+                            <div className="flex flex-column">
                                 <span style={{fontWeight:'600'}}>P/E Ratio</span>
                                 <span>{details["PERatio"]}</span>
                             </div>
-                            <div style={{display:'flex', flexDirection:'column'}}>
+                            <div className="flex flex-column">
                                 <span style={{fontWeight:'600'}}>Beta</span>
                                 <span>{details["Beta"]}</span>
                             </div>
-                            <div style={{display:'flex', flexDirection:'column'}}>
+                            <div className="flex flex-column">
                                 <span style={{fontWeight:'600'}}>Dividend Yield</span>
                                 <span>{details["DividendYield"]+"%"}</span>
                             </div>
-                            <div style={{display:'flex', flexDirection:'column'}}>
+                            <div className="flex flex-column">
                                 <span style={{fontWeight:'600'}}>Profit Margin</span>
                                 <span>{details["ProfitMargin"]}</span>
                             </div>
