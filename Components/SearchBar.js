@@ -21,7 +21,7 @@ const SearchBar=()=> {
         const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo`
         const response = await fetch(url);
         const data=await response.json()
-        console.log('data-symbol',data)
+        ('data-symbol',data)
         return data
     }
   
@@ -46,7 +46,7 @@ const SearchBar=()=> {
 
    
     const onSelection=(e)=>{
-        console.log(e.value["1. symbol"])
+        (e.value["1. symbol"])
        return router.push('/product/'+ `${e.value["1. symbol"]}`)
     }
     

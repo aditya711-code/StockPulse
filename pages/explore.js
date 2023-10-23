@@ -22,7 +22,6 @@ const Explore=()=>{
         if(get('topgainerslosers'))
         {
           const data=get('topgainerslosers')
-          console.log("localStorage",get('topgainerslosers'))
           setTopGainers(data.top_gainers)
           setTopLosers(data.top_losers)
           dispatch(updateLoading(data))

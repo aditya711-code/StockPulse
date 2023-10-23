@@ -7,11 +7,10 @@ const initialState={
     lastFetched:null,
 }
 export const fetchSearchedProducts=createAsyncThunk('searchProducts/fetchData',async(keywords)=>{
-    console.log("keywords-search",keywords)
+    ("keywords-search",keywords)
     const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${API_KEY}`
     const config = { headers: { 'User-Agent': 'request' } };
     const response = await fetch(url, config);
-    console.log('respons-redux',response)
     if (!response.ok) {
     throw new Error('Request failed');
   }
@@ -32,7 +31,6 @@ const searchProductsSlice=createSlice({
         })
         .addCase(fetchSearchedProducts.fulfilled,(state,action)=>{
             state.loading='succeeded'
-            console.log("action payload",action.payload)
             state.data=action.payload
         })
         .addCase(fetchSearchedProducts.rejected,(state,action)=>{

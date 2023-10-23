@@ -43,7 +43,6 @@ const ProductDetailsSlice=createSlice({
         })
         .addCase(fetchProductDetails.fulfilled,(state,action)=>{
             state.loading='succeeded'
-            console.log("action payload",action.payload)
             state.data=action.payload
         })
         .addCase(fetchProductDetails.rejected,(state,action)=>{

@@ -42,7 +42,7 @@ const Product=()=>{
         {
             setDetails(data)
             set('productDetails',data);
-            console.log("details",data);
+            ("details",data);
             
         }
     },[loading])
@@ -139,7 +139,7 @@ const Product=()=>{
         setChartData(data);
         setChartOptions(options);
     }, []);
-    //console.log("details",details)
+    //("details",details)
     const customizedContent=(item)=>{
             return(
                 <div style={{display:'flex', flexDirection:'column'}}>
@@ -148,7 +148,7 @@ const Product=()=>{
                 </div>
             )
     }
-    console.log("Events",events)
+    ("Events",events)
      if(loading!=='succeeded')
    {
          return (<div className="card flex justify-content-center">
