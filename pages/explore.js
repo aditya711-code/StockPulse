@@ -72,7 +72,7 @@ const Explore=()=>{
        
         return (
          
-            <div className="col-12 sm:col-6 xl:col-3 mb-3 cursor-pointer" onClick={()=>handleClick(product)} >
+            <div className="col-12 sm:col-6 xl:col-3 mb-3 cursor-pointer p-ripple" onClick={()=>handleClick(product)} >
               <Ripple/>
                 <div className="w-10 p-1 border-1 surface-border surface-card border-square sm:w-20 sm:h-20">
                   <div className="flex flex-column align-items-center gap-2 py-3">
@@ -125,7 +125,6 @@ const Explore=()=>{
             </TabView>
 
         </div>
-
         <span className=" text-primary flex flex-column justify-content-center align-items-center h-6rem">
                   <h3 className="">Load more</h3>
                   <BiSolidDownArrow/>

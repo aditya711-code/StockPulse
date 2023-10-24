@@ -5,13 +5,17 @@ import 'primereact/resources/primereact.css';
 import { PrimeReactProvider } from 'primereact/api';;
 import Layout from '@/Components/layout';
 export default function App({ Component, pageProps }) {
- 
+  const value = {
+        ripple: true,      
+    }
   return( 
-    <PrimeReactProvider >
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-    </PrimeReactProvider>
+    
+      <PrimeReactProvider value={value}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+      </PrimeReactProvider>
+
   )
       
   
