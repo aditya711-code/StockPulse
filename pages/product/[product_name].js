@@ -24,9 +24,9 @@ const Product=()=>{
     const{data,loading,error}=useSelector((state)=>state.productDetails)
     const keywords=product_name
     
-    console.log("keywords",keywords)
+    
     useEffect(()=>{
-        if(get('productDetails').Symbol==keywords)
+        if(get('productDetails') && get('productDetails').Symbol==keywords)
         {
             const data=get('productDetails')
             setDetails(data)
@@ -60,7 +60,7 @@ const Product=()=>{
     
     
     useEffect(()=>{
-        if(loading==='succeeded' && get('productDetails').Symbol!=keywords)
+        if(loading==='succeeded' && get('productDetails') && get('productDetails').Symbol!=keywords)
         {
             setDetails(data)
             set('productDetails',data);
