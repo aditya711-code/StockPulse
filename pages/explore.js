@@ -16,7 +16,10 @@ const Explore=()=>{
     const router=useRouter();
     const dispatch = useDispatch();
     const { data, loading, error } = useSelector((state) => state.topGainersLosers);
-    
+    const handleClickLoadMore=()=>{
+      set('topgainerslosers','')
+      dispatch(fetchTopGainersLosers());
+    }
       useEffect(() => {
         if(get('topgainerslosers'))
         {
@@ -82,7 +85,7 @@ const Explore=()=>{
                   <div className="flex align-items-center justify-content-between">
                     <span className="text-lg font-semibold">${product.price}</span>
                     <span className="text-lg font-semibold " style={{color:layout==='grid'?'green':'red'}}>
-                      {layout=='grid'?"+"+product.change_percentage:""+product.change_percentage}
+                      {layout=='grid'?"+"+(parseFloat(product.change_percentage)).toFixed(2):""+(parseFloat(product.change_percentage)).toFixed(2)}
                       {layout=='grid'?<BiSolidUpArrow/>:<BiSolidDownArrow/>}
                     </span>
                     
@@ -104,7 +107,6 @@ const Explore=()=>{
   
     return (
       <>
-        
         <div className="flex xl:pr-8 xl:pl-8 sm:pr-4 sm:pl-4">
             
             <TabView >
@@ -125,7 +127,8 @@ const Explore=()=>{
             </TabView>
 
         </div>
-        <span className=" text-primary flex flex-column justify-content-center align-items-center h-6rem">
+        <span className=" text-primary flex flex-column justify-content-center align-items-center h-6rem pi-ripple cursor-pointer" onClick={handleClickLoadMore} >
+                  <Ripple/>
                   <h3 className="">Load more</h3>
                   <BiSolidDownArrow/>
         </span>

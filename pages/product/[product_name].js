@@ -5,7 +5,6 @@ import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Timeline } from 'primereact/timeline';
 import {BiSolidUpArrow} from 'react-icons/bi'
-import { useParams } from 'next/navigation'
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchProductDetails } from '@/redux/features/productSlice';
 import { ProgressSpinner } from 'primereact/progressspinner';
@@ -13,6 +12,7 @@ import { fillArrayWithRandomValues } from '@/utils/helpers';
 import {get,set} from '@/utils/storage'
 import { updateLoading } from '@/redux/features/productSlice';
 import { useRouter } from 'next/router';
+
 const Product=()=>{
     const [details,setDetails]=useState([])
     const [events,setEvents]=useState([])
@@ -23,14 +23,15 @@ const Product=()=>{
     const dispatch=useDispatch()
     const{data,loading,error}=useSelector((state)=>state.productDetails)
     const keywords=product_name
-    
-    
-    useEffect(()=>{
-        if(get('productDetails') && get('productDetails').Symbol==keywords)
+
+    useEffect( ()=>{
+
+        const cachedData=get(keywords)
+        if(cachedData)
         {
-            const data=get('productDetails')
-            setDetails(data)
+            console.log("localStorage-data",cachedData)
             const values=[]
+            const data=cachedData
             values.push({
                 "key":"52-Week Low",
                 "value":"$"+data["52WeekLow"]
@@ -43,35 +44,30 @@ const Product=()=>{
                 "key":"52-WeekHigh",
                 "value":"$"+data["52WeekHigh"]
             })
-            setEvents(values);
-            console.log("events",)
             dispatch(updateLoading(data))
-            console.log("data",data)
-           
-            console.log("details",details)
+            setEvents(values);
+            setDetails(cachedData)
+            
+            
         }
         else{
-
+           
             dispatch(fetchProductDetails(keywords))
+           
         }
-       
-       
-    },[dispatch,router])
+ 
+    },[dispatch,keywords])
     
     
     useEffect(()=>{
-        if(loading==='succeeded' && get('productDetails') && get('productDetails').Symbol!=keywords)
+        if(loading==='succeeded' && data!=null)
         {
             setDetails(data)
-            set('productDetails',data);
-            console.log("details",data);
+            set(keywords,data);
             
         }
-    },[loading])
-
-    
-  
-    
+      
+    },[loading,router])
 
     const stockprices=fillArrayWithRandomValues(500,1,500)
     const negstockprices=fillArrayWithRandomValues(100,10,300)
@@ -159,9 +155,8 @@ const Product=()=>{
           </div>)
    }
     return (
-        <>
-       
-        <div className="p-d-flex p-d-flex-column xl:p-5 ">
+
+        <div className="p-d-flex p-d-flex-column xl:pl-6 xl:pr-8 ">
             <div className="surface-card p-4 shadow-2 border-round">
                 
                 <div className="text-3xl font-medium text-900 mb-2 " style={{display:"flex",alignItems:"center",justifyContent:'space-between'}}>
@@ -186,9 +181,9 @@ const Product=()=>{
                     <Chart height="250px" type="line" data={chartData} options={chartOptions} />
                 </div>
             </div>
-            <div className="card mt-4 border-round">
-                <BlockUI >
-                    <Panel className="p-2 "header={"About "+`${details.Symbol}`}  >
+            <div className="surface-card p-4 mt-3  shadow-2 border-round">
+                <BlockUI  >
+                    <Panel className="p-2 h-full "header={"About "+`${details.Symbol}`}  >
                         <p className="m-1">
                             {details.Description}
                         </p>
@@ -225,7 +220,7 @@ const Product=()=>{
                 </BlockUI>
             </div>
          </div>
-         </>
+             
     )
 }
 export default Product
