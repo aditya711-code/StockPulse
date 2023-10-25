@@ -85,7 +85,7 @@ const Explore=()=>{
                   <div className="flex align-items-center justify-content-between">
                     <span className="text-lg font-semibold">${product.price}</span>
                     <span className="text-lg font-semibold " style={{color:layout==='grid'?'green':'red'}}>
-                      {layout=='grid'?"+"+(parseFloat(product.change_percentage)).toFixed(2):""+(parseFloat(product.change_percentage)).toFixed(2)}
+                      {layout=='grid'?"+"+(parseFloat(product.change_percentage)).toFixed(2)+"%":""+(parseFloat(product.change_percentage)).toFixed(2)+"%"}
                       {layout=='grid'?<BiSolidUpArrow/>:<BiSolidDownArrow/>}
                     </span>
                     
