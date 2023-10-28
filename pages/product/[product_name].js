@@ -4,7 +4,7 @@ import { Tag } from 'primereact/tag';
 import { BlockUI } from 'primereact/blockui';
 import { Panel } from 'primereact/panel';
 import { Timeline } from 'primereact/timeline';
-import {BiSolidUpArrow} from 'react-icons/bi'
+import {BiSolidUpArrow,BiSolidDownArrow} from 'react-icons/bi'
 import { useDispatch,useSelector } from 'react-redux';
 import { fetchProductDetails } from '@/redux/features/productSlice';
 import { ProgressSpinner } from 'primereact/progressspinner';
@@ -23,13 +23,14 @@ const Product=()=>{
     const dispatch=useDispatch()
     const{data,loading,error}=useSelector((state)=>state.productDetails)
     const keywords=product_name
+    const {price,change_percentage,type}=useSelector((state)=>state.topGainersLosers)
 
     useEffect( ()=>{
 
         const cachedData=get(keywords)
         if(cachedData)
         {
-            console.log("localStorage-data",cachedData)
+           
             const values=[]
             const data=cachedData
             values.push({
@@ -38,7 +39,7 @@ const Product=()=>{
             })
             values.push({
                 "key":"Current Price",
-                "value":"$"+data["AnalystTargetPrice"]
+                "value":"$"+price
             })
             values.push({
                 "key":"52-WeekHigh",
@@ -166,11 +167,23 @@ const Product=()=>{
                     </div>
                    
                     <div className="p-d-flex p-d-flex-column" >
-                        <div className="font-medium text-900 mb-2">{"$"+details["AnalystTargetPrice"]}</div>
+                        <div className="font-medium text-900 mb-2">{"$"+price}</div>
                         
-                        <span className="text-lg font-semibold " style={{color:"green"}}>
-                             {"+"+details["DividendYield"]+"%"}
-                             <BiSolidUpArrow/>
+                        <span className="text-lg font-semibold " style={{color:type==='gainers'?"green":"red"}}>
+                            {type==='gainers'? (
+                                <>
+                                    {"+"+change_percentage}
+                                    <BiSolidUpArrow/>
+                                </>
+                            ):(
+                                <>
+                               
+                                    {change_percentage}
+                                    <BiSolidDownArrow/>
+                                </>
+                            )
+                        }
+                            
                         </span>
                     </div>
                 </div>

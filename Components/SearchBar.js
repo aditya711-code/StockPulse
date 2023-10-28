@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { OverlayPanel } from 'primereact/overlaypanel';
 import { Column } from 'primereact/column';
@@ -43,7 +42,7 @@ const SearchBar=()=> {
     
     return (
         <div className="card flex flex-column align-items-center gap-3">
-                <span className="p-input-icon-left searchBar" onClick={(e) => op.current.toggle(e)}>
+                <span className="p-input-icon-left searchBar align-items-center"  onClick={(e) => op.current.toggle(e)}>
                     <AiOutlineSearch />
                     <InputText placeholder="Search" type="text" className="p-inputtext-sm" value={searchSymbol} onChange={(e)=>setSearchSymbol(e.target.value)}/>
                 </span>
@@ -54,8 +53,6 @@ const SearchBar=()=> {
                     <Column header="Equity" field="2. name" />
                     <Column header="" field="1. symbol" />
                 </DataTable>
-               
-               
             </OverlayPanel>
         </div>
     );

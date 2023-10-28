@@ -19,6 +19,6 @@ body{
   background-color: rgb(246, 246, 246);
 }
 body::-webkit-scrollbar{
-  
-  display:none;
+  font-family: var(--font-family);
+  display:none; 
 }
