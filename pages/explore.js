@@ -68,7 +68,7 @@ const Explore=()=>{
     const handleClick=(product)=>{
      
       const p=product.price
-      const change_p=parseFloat(product.change_percentage).toFixed(2)
+      const change_p=parseFloat(product.change_percentage).toFixed(2)+"%"
 
       if(type!==tab)
       {
