@@ -1,5 +1,5 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
-import { API_URLS,API_KEY } from '@/utils/constant'
+import { API_URLS } from '@/utils/constant'
 const initialState={
     data:null,
     loading:'idle',
@@ -8,14 +8,13 @@ const initialState={
 }
 export const fetchSearchedProducts=createAsyncThunk('searchProducts/fetchData',async(keywords)=>{
     
-    // const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keywords}&apikey=${API_KEY}`
-    const url=`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=tesco&apikey=demo`
+    const url=API_URLS.getSearch(keywords)
     const config = { headers: { 'User-Agent': 'request' } };
     const response = await fetch(url, config);
     if (!response.ok) {
     throw new Error('Request failed');
   }
-  const data=await response.json()
+    const data=await response.json()
 
   return data
 })

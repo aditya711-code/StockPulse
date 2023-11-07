@@ -10,33 +10,31 @@ import {fetchSearchedProducts} from '@/redux/features/searchSlice';
 
 const SearchBar=()=> {
     const [products, setProducts] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState(null);
     const [searchSymbol,setSearchSymbol]=useState('')
     const router=useRouter();
     const dispatch=useDispatch()
     const{data,loading,error}=useSelector((state)=>state.searchProducts)  
     useEffect(()=>{
         const keywords=searchSymbol
-        dispatch(fetchSearchedProducts(keywords))
+        let timer=setTimeout(()=>{
+            dispatch(fetchSearchedProducts(keywords))
+        },400)
+        return ()=>clearTimeout(timer)
+        
 
     },[searchSymbol])
     
     useEffect(()=>{
         if(loading==='succeeded')
         {
-           
             setProducts(data.bestMatches)
         }
     },[loading])
        
 
     const op = useRef(null);
-    const toast = useRef(null);
-    const isMounted = useRef(false);
-
-   
+    
     const onSelection=(e)=>{
-        (e.value["1. symbol"])
        return router.push('/product/'+ `${e.value["1. symbol"]}`)
     }
     
@@ -48,8 +46,7 @@ const SearchBar=()=> {
                 </span>
           
             <OverlayPanel ref={op} showCloseIcon closeOnEscape dismissable={false}>
-                <DataTable value={products} selectionMode="single" paginator rows={5} selection={selectedProduct} onSelectionChange={(e)=>onSelection(e)}>
-                    
+                <DataTable value={products} selectionMode="single" paginator rows={5}  onSelectionChange={(e)=>onSelection(e)}>              
                     <Column header="Equity" field="2. name" />
                     <Column header="" field="1. symbol" />
                 </DataTable>
