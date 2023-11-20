@@ -83,7 +83,7 @@ const Explore = () => {
     return router.push("/product/" + `${product.ticker}`);
   };
 
-  const gridItem = (product, layout) => {
+  const GridItem = (product, layout) => {
     useEffect(() => {
       setTab(layout);
     }, [layout]);
@@ -124,7 +124,7 @@ const Explore = () => {
       return;
     }
 
-    return gridItem(product, layout);
+    return GridItem(product, layout);
   };
 
   return (
