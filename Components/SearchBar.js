@@ -13,8 +13,10 @@ const SearchBar=()=> {
     const [searchSymbol,setSearchSymbol]=useState('')
     const router=useRouter();
     const dispatch=useDispatch()
-    const{data,loading,error}=useSelector((state)=>state.searchProducts)  
+    const{data,loading,error}=useSelector((state)=>state.searchProducts) 
+ 
     useEffect(()=>{
+        if(!searchSymbol)return
         const keywords=searchSymbol
         let timer=setTimeout(()=>{
             dispatch(fetchSearchedProducts(keywords))

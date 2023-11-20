@@ -1,7 +1,4 @@
 import React ,{ useState, useEffect, useRef } from 'react';
-import { InputText } from 'primereact/inputtext';
-import { Button } from 'primereact/button';
-import { Panel } from 'primereact/panel';
 import Link from 'next/link';
 import {AiOutlineLineChart,AiOutlineSearch} from 'react-icons/ai'
 import SearchBar from './SearchBar';
