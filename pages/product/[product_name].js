@@ -78,7 +78,7 @@ const Product = () => {
       </div>
     );
   };
-  if (error) {
+  if (error && !get(keywords)) {
     return <Error error={error} />;
   }
   if (loading !== "succeeded") {
