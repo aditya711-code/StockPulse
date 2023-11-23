@@ -12,10 +12,16 @@ export const fetchProductDetails = createAsyncThunk(
     const config = { headers: { "User-Agent": "request" } };
     const response = await fetch(url, config);
 
-    if (!response.ok || response.Information) {
+    if (response.Information) {
       throw new Error("Request failed");
     }
     const data = await response.json();
+    if (data.Information) {
+      throw new Error("Oops!API Limit Reached");
+    }
+    if (data != null && Object.keys(data).length == 0) {
+      throw new Error("Data Not Found!!");
+    }
 
     return data;
   }
@@ -44,7 +50,7 @@ const ProductDetailsSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(fetchProductDetails.rejected, (state, action) => {
-        (state.loading = "failed"), (state.error = action.error.message);
+        state.error = action.error.message;
       });
   },
 });

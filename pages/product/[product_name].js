@@ -10,6 +10,7 @@ import { get, set } from "@/utils/storage";
 import { updateLoading } from "@/redux/features/productSlice";
 import { useRouter } from "next/router";
 import StockGraph from "@/Components/StockGraph";
+import Error from "@/Components/Error";
 const Product = () => {
   const [details, setDetails] = useState([]);
   const [events, setEvents] = useState([]);
@@ -41,14 +42,12 @@ const Product = () => {
   useEffect(() => {
     const cachedData = get(keywords);
     if (cachedData) {
-      console.log("enter if");
       const values = processData(cachedData);
       dispatch(updateLoading(cachedData));
       setEvents(values);
       setDetails(cachedData);
       return;
     } else {
-      console.log("enter else");
       dispatch(fetchProductDetails(keywords));
     }
   }, [router.isReady == true]);
@@ -79,6 +78,9 @@ const Product = () => {
       </div>
     );
   };
+  if (error) {
+    return <Error error={error} />;
+  }
   if (loading !== "succeeded") {
     return (
       <div className='card flex justify-content-center'>
