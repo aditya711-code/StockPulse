@@ -23,7 +23,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 .notFound {
-  margin: 10rem;
+  margin: 5rem;
   text-align: center;
 }
 .notFound > h1 {
@@ -41,7 +41,7 @@ body::-webkit-scrollbar {
 }
 /*****Error**/
 .errorPage {
-  margin: 10rem;
+  margin: 5rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
